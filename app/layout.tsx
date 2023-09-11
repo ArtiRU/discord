@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 
+import { ThemeProvider } from '@/providers/theme-provider';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Open_Sans } from 'next/font/google';
 import { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
 
 const inter = Open_Sans({ subsets: ['latin'] });
@@ -14,8 +16,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
+      <html suppressHydrationWarning lang="en">
+        <body className={cn(inter.className, 'bg-white dark:bg-[#313338]')}>
+          <ThemeProvider
+            storageKey="discord-theme"
+            enableSystem={false}
+            defaultTheme="dark"
+            attribute="class"
+          >
+            {children}
+          </ThemeProvider>
+        </body>
       </html>
     </ClerkProvider>
   );
