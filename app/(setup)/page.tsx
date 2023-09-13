@@ -1,6 +1,6 @@
+import InitialModal from '@/components/modals/initial-modal';
 import { initProfile } from '@/lib/init-profile';
 import { redirect } from 'next/navigation';
-import { UserButton } from '@clerk/nextjs';
 import { db } from '@/lib/db';
 import { FC } from 'react';
 
@@ -20,12 +20,7 @@ const SetupPage: FC = async () => {
   if (server) {
     return redirect(`/servers/${server.id}`);
   }
-  return (
-    <div>
-      <div>Create a server</div>
-      <UserButton afterSignOutUrl="/" />
-    </div>
-  );
+  return <InitialModal />;
 };
 
 export default SetupPage;
