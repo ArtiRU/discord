@@ -1,7 +1,7 @@
 import NavigationSidebar from '@/components/navigation/navigation-sidebar';
 import { PropsWithChildren, FC } from 'react';
 
-const Layout: FC<PropsWithChildren> = ({ children }) => {
+const SidebarLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className="h-full">
       <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
@@ -12,4 +12,4 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default Layout;
+export default SidebarLayout;
