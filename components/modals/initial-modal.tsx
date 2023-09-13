@@ -20,7 +20,9 @@ import FileUpload from '@/components/file-upload';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState, FC } from 'react';
 import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import { z } from 'zod';
 
 const formSchema = z.object({
@@ -34,6 +36,7 @@ const formSchema = z.object({
 
 const InitialModal: FC = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const { refresh } = useRouter();
   const form = useForm({
     defaultValues: {
       imageUrl: '',
@@ -45,7 +48,15 @@ const InitialModal: FC = () => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      await axios.post('/api/servers', values);
+
+      form.reset();
+      refresh();
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
