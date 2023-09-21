@@ -1,5 +1,6 @@
 'use client';
 
+import CreateChannelModal from '@/components/modals/create-channel-modal';
 import CreateServerModal from '@/components/modals/create-server-modal';
 import InviteServerModal from '@/components/modals/invite-server-modal';
 import EditServerModal from '@/components/modals/edit-server-modal';
@@ -23,6 +24,7 @@ const ModalProvider: FC = () => {
       <InviteServerModal />
       <EditServerModal />
       <MembersModal />
+      <CreateChannelModal />
     </>
   );
 };
