@@ -1,4 +1,5 @@
 import ServerSidebar from '@/components/server/server-sidebar';
+import ServerMembers from '@/components/server/server-members';
 import { currentProfile } from '@/lib/current-profile';
 import { redirectToSignIn } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
@@ -40,6 +41,9 @@ const ServerIdLayout: FC<ServerIdLayoutProps> = async ({
         <ServerSidebar serverId={server.id} />
       </div>
       <div className="h-full md:pl-60">{children}</div>
+      <div className="hidden md:flex h-full w-60 z-20 flex-col inset-y-0 fixed right-0">
+        <ServerMembers serverId={server.id} />
+      </div>
     </div>
   );
 };

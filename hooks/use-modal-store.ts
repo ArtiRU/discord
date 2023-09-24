@@ -1,4 +1,4 @@
-import { Server } from '@prisma/client';
+import { ChannelType, Server } from '@prisma/client';
 import { create } from 'zustand';
 
 export type ModalType =
@@ -11,6 +11,7 @@ export type ModalType =
   | 'invite';
 
 interface ModalData {
+  channelType?: ChannelType;
   server?: Server;
 }
 

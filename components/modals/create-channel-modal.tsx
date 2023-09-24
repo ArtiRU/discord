@@ -30,8 +30,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ChannelType } from '@prisma/client';
 import { useForm } from 'react-hook-form';
+import { useEffect, FC } from 'react';
 import qs from 'query-string';
-import { FC } from 'react';
 import axios from 'axios';
 import { z } from 'zod';
 
@@ -48,12 +48,13 @@ const formSchema = z.object({
 });
 
 const CreateChannelModal: FC = () => {
-  const { onClose, isOpen, type } = useModal();
+  const { onClose, isOpen, type, data } = useModal();
+  const { channelType } = data;
   const { refresh } = useRouter();
   const params = useParams();
   const form = useForm({
     defaultValues: {
-      type: ChannelType.TEXT,
+      type: channelType || ChannelType.TEXT,
       name: '',
     },
     resolver: zodResolver(formSchema),
@@ -85,6 +86,14 @@ const CreateChannelModal: FC = () => {
     form.reset();
     onClose();
   };
+
+  useEffect(() => {
+    if (channelType) {
+      form.setValue('type', channelType);
+    } else {
+      form.setValue('type', ChannelType.TEXT);
+    }
+  }, [channelType]);
 
   return (
     <Dialog onOpenChange={handleClose} open={isModalOpen}>
