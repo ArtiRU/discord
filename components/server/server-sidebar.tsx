@@ -1,4 +1,5 @@
 import { ShieldAlert, ShieldCheck, Video, Hash, Mic } from 'lucide-react';
+import ServerMembersItem from '@/components/server/server-members-item';
 import ServerSection from '@/components/server/server-section';
 import ServerChannel from '@/components/server/server-channel';
 import ServerHeader from '@/components/server/server-header';
@@ -175,6 +176,25 @@ const ServerSidebar: FC<ServerSidebarProps> = async ({ serverId }) => {
             ))}
           </div>
         )}
+        <div className="md:hidden">
+          {!!members?.length && (
+            <div className="mb-2">
+              <ServerSection
+                sectionType="members"
+                label="Members"
+                server={server}
+                role={role}
+              />
+              {members.map((member) => (
+                <ServerMembersItem
+                  key={member.id}
+                  member={member}
+                  server={server}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </ScrollArea>
     </div>
   );
