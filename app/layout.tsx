@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { SocketProvider } from '@/providers/socket-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import ModalProvider from '@/providers/modal-provider';
 import { ClerkProvider } from '@clerk/nextjs';
@@ -25,8 +26,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             defaultTheme="dark"
             attribute="class"
           >
-            <ModalProvider />
-            {children}
+            <SocketProvider>
+              <ModalProvider />
+              {children}
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>
