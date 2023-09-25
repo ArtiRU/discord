@@ -40,7 +40,7 @@ const ServerIdLayout: FC<ServerIdLayoutProps> = async ({
       <div className="hidden md:flex h-full w-60 z-20 flex-col inset-y-0 fixed">
         <ServerSidebar serverId={server.id} />
       </div>
-      <div className="h-full md:pl-60">{children}</div>
+      <div className="h-full md:pl-60 md:pr-60">{children}</div>
       <div className="hidden md:flex h-full w-60 z-20 flex-col inset-y-0 fixed right-0">
         <ServerMembers serverId={server.id} />
       </div>

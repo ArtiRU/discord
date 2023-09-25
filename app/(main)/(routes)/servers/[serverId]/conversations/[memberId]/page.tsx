@@ -55,7 +55,6 @@ const MemberIdPage: FC<MemberIdPageProps> = async ({ params }) => {
         serverId={params.serverId}
         type="conversation"
       />
-      <div></div>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({
         <UserAvatar className="h-8 w-8 md:h-8 md:w-8 mr-2" src={imageUrl} />
       )}
       <p className="font-semibold text-md text-black dark:text-white">{name}</p>
-      <div className="flex items-center ml-2">
+      <div className="flex items-center ml-auto">
         <SocketIndicator />
       </div>
     </div>
