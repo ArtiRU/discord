@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SocketProvider } from '@/providers/socket-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import ModalProvider from '@/providers/modal-provider';
+import QueryProvider from '@/providers/query-provider';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Open_Sans } from 'next/font/google';
 import { ReactNode } from 'react';
@@ -28,7 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           >
             <SocketProvider>
               <ModalProvider />
-              {children}
+              <QueryProvider>{children}</QueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
