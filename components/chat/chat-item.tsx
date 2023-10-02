@@ -4,6 +4,7 @@ import { ShieldAlert, ShieldCheck, FileIcon, Trash, Edit } from 'lucide-react';
 import { FormControl, FormField, FormItem, Form } from '@/components/ui/form';
 import ActionTooltip from '@/components/action-tooltip';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useModal } from '@/hooks/use-modal-store';
 import UserAvatar from '@/components/user-avatar';
 import { Profile, Member } from '@prisma/client';
 import { useEffect, useState, FC } from 'react';
@@ -62,7 +63,6 @@ const ChatItem: FC<ChatItemProps> = ({
   });
 
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
 
   const fileType = fileUrl?.split('.').pop();
   const isAdmin = currentMember.role === MemberRole.ADMIN;
@@ -74,6 +74,8 @@ const ChatItem: FC<ChatItemProps> = ({
 
   const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
   const canEditMessage = !deleted && isOwner && !fileUrl;
+
+  const { onOpen } = useModal();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -167,7 +169,7 @@ const ChatItem: FC<ChatItemProps> = ({
               )}
             >
               {content}
-              {isUpdated && !isDeleting && (
+              {isUpdated && !deleted && (
                 <span className="text-[10px] mx-2 text-zinc-500 dark:text-zinc-400">
                   (edited)
                 </span>
@@ -234,6 +236,12 @@ const ChatItem: FC<ChatItemProps> = ({
             <Trash
               className="cursor-pointer ml-auto w-4 h-4 text-zinc-500
               hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+              onClick={() =>
+                onOpen('deleteMessage', {
+                  apiUrl: `${socketUrl}/${id}`,
+                  query: socketQuery,
+                })
+              }
             />
           </ActionTooltip>
         </div>

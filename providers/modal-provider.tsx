@@ -2,6 +2,7 @@
 
 import CreateChannelModal from '@/components/modals/create-channel-modal';
 import DeleteChannelModal from '@/components/modals/delete-channel-modal';
+import DeleteMessageModal from '@/components/modals/delete-message-modal';
 import CreateServerModal from '@/components/modals/create-server-modal';
 import InviteServerModal from '@/components/modals/invite-server-modal';
 import DeleteServerModal from '@/components/modals/delete-server-modal';
@@ -35,6 +36,7 @@ const ModalProvider: FC = () => {
       <DeleteChannelModal />
       <EditChannelModal />
       <MessageFileModal />
+      <DeleteMessageModal />
     </>
   );
 };
