@@ -1,3 +1,4 @@
+import ChatVideoButton from '@/components/chat/chat-video-button';
 import SocketIndicator from '@/components/socket-indicator';
 import MobileToggle from '@/components/mobile-toggle';
 import UserAvatar from '@/components/user-avatar';
@@ -28,6 +29,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({
       )}
       <p className="font-semibold text-md text-black dark:text-white">{name}</p>
       <div className="flex items-center ml-auto">
+        {type === 'conversation' && <ChatVideoButton />}
         <SocketIndicator />
       </div>
     </div>
