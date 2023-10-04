@@ -19,6 +19,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ imageUrl, name, id }) => {
   const onClick = () => {
     push(`/servers/${id}`);
   };
+
   return (
     <ActionTooltip align="center" side="right" label={name}>
       <button className="group relative flex items-center" onClick={onClick}>

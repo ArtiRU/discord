@@ -15,6 +15,9 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
     const httpServer: NetServer = res.socket.server as any;
     const io = new ServerIO(httpServer, {
       // @ts-ignore
+      cors: {
+        origin: '*',
+      },
       addTrailingSlash: false,
       path: path,
     });
