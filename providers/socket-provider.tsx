@@ -16,7 +16,7 @@ export const SocketContext = createContext<SocketContextType>({
 export const SocketProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
-
+  ``;
   useEffect(() => {
     const socketInstance = new (ClientIO as any)(
       process.env.NEXT_PUBLIC_SITE_URL!,
