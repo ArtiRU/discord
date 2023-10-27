@@ -20,11 +20,7 @@ const VideoRoom: FC<VideoRoomProps> = ({ chatId, video, audio }) => {
   const params = useParams();
 
   useEffect(() => {
-    if (!user?.firstName || !user.lastName) {
-      return;
-    }
-
-    const name = `${user?.firstName} ${user.lastName}`;
+    const name = `${user?.firstName} ${user?.lastName}`;
 
     (async () => {
       try {
