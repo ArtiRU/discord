@@ -21,7 +21,7 @@ export default async function handler(
     }
 
     if (!conversationId) {
-      return res.status(400).json({ error: 'Conversation ID is missing' });
+      return res.status(400).json({ error: 'Conversation ID missing' });
     }
 
     if (!content) {
@@ -93,7 +93,7 @@ export default async function handler(
 
     return res.status(200).json(message);
   } catch (error) {
-    console.log('DIRECT MESSAGES POST', error);
+    console.log('[DIRECT_MESSAGES_POST]', error);
     return res.status(500).json({ message: 'Internal Error' });
   }
 }

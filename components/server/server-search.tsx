@@ -50,11 +50,11 @@ const ServerSearch: FC<ServerSearchProps> = ({ data }) => {
     setIsOpen(false);
 
     if (type === 'channel') {
-      return push(`/servers/${params?.serverId}/conversations/${id}`);
+      return push(`/servers/${params?.serverId}/channels/${id}`);
     }
 
     if (type === 'member') {
-      return push(`/servers/${params?.serverId}/members/${id}`);
+      return push(`/servers/${params?.serverId}/conversations/${id}`);
     }
   };
 

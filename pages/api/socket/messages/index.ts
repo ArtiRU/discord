@@ -21,15 +21,15 @@ export default async function handler(
     }
 
     if (!serverId) {
-      return res.status(400).json({ error: 'Server ID is missing' });
+      return res.status(400).json({ error: 'Server ID missing' });
     }
 
     if (!channelId) {
-      return res.status(400).json({ error: 'Channel ID is missing' });
+      return res.status(400).json({ error: 'Channel ID missing' });
     }
 
     if (!content) {
-      return res.status(400).json({ error: 'Content is missing' });
+      return res.status(400).json({ error: 'Content missing' });
     }
 
     const server = await db.server.findFirst({
@@ -52,7 +52,7 @@ export default async function handler(
 
     const channel = await db.channel.findFirst({
       where: {
-        serverId: server.id as string,
+        serverId: serverId as string,
         id: channelId as string,
       },
     });
@@ -73,8 +73,8 @@ export default async function handler(
       data: {
         channelId: channelId as string,
         memberId: member.id,
-        fileUrl,
         content,
+        fileUrl,
       },
       include: {
         member: {
@@ -91,7 +91,7 @@ export default async function handler(
 
     return res.status(200).json(message);
   } catch (error) {
-    console.log('MESSAGES ERROR', error);
+    console.log('[MESSAGES_POST]', error);
     return res.status(500).json({ message: 'Internal Error' });
   }
 }

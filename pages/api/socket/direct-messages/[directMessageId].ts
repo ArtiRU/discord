@@ -22,7 +22,7 @@ export default async function handler(
     }
 
     if (!conversationId) {
-      return res.status(400).json({ error: 'Conversation ID is missing' });
+      return res.status(400).json({ error: 'Conversation ID missing' });
     }
 
     const conversation = await db.conversation.findFirst({
@@ -143,7 +143,7 @@ export default async function handler(
 
     return res.status(200).json(directMessage);
   } catch (error) {
-    console.log('MESSAGE ID', error);
+    console.log('[MESSAGE_ID]', error);
     return res.status(500).json({ error: 'Internal Error' });
   }
 }

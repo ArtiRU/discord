@@ -1,8 +1,23 @@
 import { db } from '@/lib/db';
 
+export const getOrCreateConversation = async (
+  memberOneId: string,
+  memberTwoId: string,
+) => {
+  let conversation =
+    (await findConversation(memberOneId, memberTwoId)) ||
+    (await findConversation(memberTwoId, memberOneId));
+
+  if (!conversation) {
+    conversation = await createNewConversation(memberOneId, memberTwoId);
+  }
+
+  return conversation;
+};
+
 const findConversation = async (memberOneId: string, memberTwoId: string) => {
   try {
-    return db.conversation.findFirst({
+    return await db.conversation.findFirst({
       include: {
         memberOne: {
           include: {
@@ -16,11 +31,10 @@ const findConversation = async (memberOneId: string, memberTwoId: string) => {
         },
       },
       where: {
-        AND: [{ memberOneId, memberTwoId }],
+        AND: [{ memberOneId: memberOneId }, { memberTwoId: memberTwoId }],
       },
     });
-  } catch (error) {
-    console.log('FIND CONVERSATION ERROR', error);
+  } catch {
     return null;
   }
 };
@@ -30,7 +44,7 @@ const createNewConversation = async (
   memberTwoId: string,
 ) => {
   try {
-    return db.conversation.create({
+    return await db.conversation.create({
       include: {
         memberOne: {
           include: {
@@ -44,27 +58,11 @@ const createNewConversation = async (
         },
       },
       data: {
-        memberTwoId,
         memberOneId,
+        memberTwoId,
       },
     });
-  } catch (error) {
-    console.log('CREATE CONVERSATION ERROR', error);
+  } catch {
     return null;
   }
-};
-
-export const getOrCreateConversation = async (
-  memberOneId: string,
-  memberTwoId: string,
-) => {
-  let conversation =
-    (await findConversation(memberOneId, memberTwoId)) ||
-    (await findConversation(memberOneId, memberTwoId));
-
-  if (!conversation) {
-    conversation = await createNewConversation(memberOneId, memberTwoId);
-  }
-
-  return conversation;
 };

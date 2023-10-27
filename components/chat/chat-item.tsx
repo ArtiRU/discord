@@ -108,7 +108,7 @@ const ChatItem: FC<ChatItemProps> = ({
     form.reset({
       content,
     });
-  }, [content]);
+  }, [content, form]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
