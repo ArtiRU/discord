@@ -21,7 +21,6 @@ export const SocketProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const socketInstance = new (ClientIO as any)(
       process.env.NEXT_PUBLIC_SITE_URL!,
       {
-        addTrailingSlash: false,
         path: '/api/socket/io',
       },
     );
